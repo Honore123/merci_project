@@ -33,12 +33,14 @@ Route::prefix('settings')->middleware(['auth'])->group(function () {
 });
 Route::prefix('order')->group(function () {
     Route::get('table/{table}', [TableOrderController::class, 'index'])->name('order.index');
+
     Route::post('table/{table}', [TableOrderController::class, 'store'])->name('order.store');
 });
-Route::prefix('report')->group(function (){
+Route::prefix('report')->middleware(['auth'])->group(function (){
     Route::get('', [SoldProductController::class,'index'])->name('report.index');
     Route::get('{order}', [SoldProductController::class, 'show'])->name('report.show');
 });
-
+Route::get('order/device', [TableOrderController::class,'deviceIndex']);
+Route::get('order/device/confirm', [TableOrderController::class,'deviceConfirm']);
 
 require __DIR__ . '/auth.php';

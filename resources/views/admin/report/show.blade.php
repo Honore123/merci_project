@@ -57,7 +57,7 @@
                                     @endforelse
                                     <tr>
                                         <td colspan="4" class="text-bold text-center">Total</td>
-                                        <td class="text-bold">{{number_format($product->sum('amount'),0,'.',',')}} Rwf</td>
+                                        <td class="text-bold">{{number_format($order->total_amount,0,'.',',')}} Rwf</td>
                                     </tr>
                                     </tbody>
                                 </table>

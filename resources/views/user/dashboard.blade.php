@@ -14,6 +14,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$product->product_name}}</h5>
                         <p class="card-text text-warning">{{number_format($product->price,0,'.',',') }} Rwf</p>
+                        <input type="number" class="form-control mb-3 w-50" name="quantity-{{$product->id}}" value="1" placeholder="Quantity">
                         <div class="icheck-warning d-inline">
                             <input type="checkbox" name="product[]" id="checkboxPrimary{{$product->id}}" value="{{$product->id}}">
                             <label for="checkboxPrimary{{$product->id}}">
