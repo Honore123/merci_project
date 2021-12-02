@@ -14,7 +14,7 @@ class TableOrderController extends Controller
     public function index(Table $table)
     {
         return view('user.dashboard', [
-            'products' => Product::all(),
+            'products' => Product::where('quantity','!=', 0)->get(),
             'table' => $table
         ]);
 
@@ -48,6 +48,7 @@ class TableOrderController extends Controller
     public function store(Table $table){
         $data = request()->validate([
             'product' => 'required',
+            'number' => 'required'
         ]);
         $totalAmount = 0;
         foreach ($data['product'] as $id) {
@@ -67,6 +68,9 @@ class TableOrderController extends Controller
                 'product_id' => $product->id,
                 'quantity' => $quantity,
                 'amount' => $product->price
+            ]);
+            $product->update([
+                'quantity' => $product->quantity - $quantity,
             ]);
         }
         return redirect()->back()->with('success', 'Order has been submitted');
